@@ -9,6 +9,7 @@ var User = require('../models/user');
 var utils = require('../tools/utils');
 var emailer = require('../tools/emailer');
 const URL = require('../package.json').serverURL;
+const frontendURL = require('../package.json').frontendURL;
 var db = mongoose.connection;
 
 //POST call for making a new user
@@ -152,7 +153,7 @@ router.post('/forgot', function (req, res) {
         });
         //Send email
         try {
-          emailer.sendReset(user.username, user.email.address, URL+'login/token:' + user.email.resetPasswordToken);
+          emailer.sendReset(user.username, user.email.address, frontendURL+'/#/forgot/' + user.email.resetPasswordToken);
         } catch (err) {
           res.json({ success: false, msg: 'Something went wrong when sending the email, try again' });
         }
@@ -199,7 +200,7 @@ router.post('/reset', function (req, res) {
         res.json({ success: false, msg: 'Something went wrong when sending the email, try again' });
       }
       //Return JSON object back
-      return res.json({ success: true, msg: "If registered, an email with instructions on how to reset your password has been sent to the provided email" });
+      return res.json({ success: true, msg: "Password has been reset!" });
     }
   });
 });
