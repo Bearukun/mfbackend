@@ -66,7 +66,7 @@ describe("GET: /api/stats/Exhibat ", function () {
   var options = {
     url: "http://localhost:" + TEST_PORT + "/api/stats/Exhibat",
     method: "GET",
-    headers: {Authorization: "JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImJlYXJ1a3VuQGdtYWlsLmNvbSIsImlhdCI6MTUyNTA3Njg1N30.duBYsnUBWK1slstqvzUc3szqzeHfiMx074Pcztz36L0"}
+    headers: { Authorization: "JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImJlYXJ1a3VuQGdtYWlsLmNvbSIsImlhdCI6MTUyNTA3Njg1N30.duBYsnUBWK1slstqvzUc3szqzeHfiMx074Pcztz36L0" }
   }
   it("should get a success true when retriving stats for Exhibat", function () {
     request(options, function (error, res, body) {
@@ -75,3 +75,63 @@ describe("GET: /api/stats/Exhibat ", function () {
     });
   })
 });
+
+//Test stats
+describe("GET: /api/stats/ ", function () {
+  var options = {
+    url: "http://localhost:" + TEST_PORT + "/api/stats/",
+    method: "GET",
+    headers: { Authorization: "JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImJlYXJ1a3VuQGdtYWlsLmNvbSIsImlhdCI6MTUyNTA3Njg1N30.duBYsnUBWK1slstqvzUc3szqzeHfiMx074Pcztz36L0" }
+  }
+  it("should get a success true when retriving all stats", function () {
+    request(options, function (error, res, body) {
+      var answer = JSON.parse(body)
+      expect(answer.success).to.be.true;
+    });
+  })
+});
+
+//Test get user
+describe("GET: /api/user/:username ", function () {
+  var options = {
+    url: "http://localhost:" + TEST_PORT + "/api/user/Bear",
+    method: "GET",
+    headers: { Authorization: "JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImJlYXJ1a3VuQGdtYWlsLmNvbSIsImlhdCI6MTUyNTA3Njg1N30.duBYsnUBWK1slstqvzUc3szqzeHfiMx074Pcztz36L0" }
+  }
+  it("should get a success true when retriving the specified user", function () {
+    request(options, function (error, res, body) {
+      var answer = JSON.parse(body)
+      expect(answer.success).to.be.true;
+    });
+  })
+  it("username should be equal Bear", function () {
+    request(options, function (error, res, body) {
+      var answer = JSON.parse(body)
+      expect(answer.user.username).to.equal('Bear');
+    });
+  })
+});
+
+//Test get users
+describe("GET: /api/users ", function () {
+  var options = {
+    url: "http://localhost:" + TEST_PORT + "/api/users",
+    method: "GET",
+    headers: { Authorization: "JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImJlYXJ1a3VuQGdtYWlsLmNvbSIsImlhdCI6MTUyNTA3Njg1N30.duBYsnUBWK1slstqvzUc3szqzeHfiMx074Pcztz36L0" }
+  }
+
+  it("should get a success true when retriving the users", function () {
+    request(options, function (error, res, body) {
+      var answer = JSON.parse(body)
+      expect(answer.success).to.be.true;
+    });
+  })
+
+  it("the returned array should not be empty", function () {
+    request(options, function (error, res, body) {
+      var answer = JSON.parse(body)
+      expect(answer.users).not.to.be.empty;
+    });
+  })
+});
+
