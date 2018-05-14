@@ -19,7 +19,7 @@ after(function (done) {
 
 //Test signin
 describe("POST: /api/signin ", function () {
-  var options = {
+  let options = {
     url: "http://localhost:" + TEST_PORT + "/api/signin",
     method: "POST",
     json: true,
@@ -31,8 +31,7 @@ describe("POST: /api/signin ", function () {
 
   it("should be a success", function () {
     request(options, function (error, res, body) {
-      var success = body.success;
-      expect(success).to.be.true;
+      expect(res.body.success).to.be.true;
     });
   })
   it("should get a token", function () {
@@ -42,14 +41,14 @@ describe("POST: /api/signin ", function () {
   })
   it("should get a username", function () {
     request(options, function (error, res, body) {
-      expect(body.username).to.be.equal("Bear");
+      expect(res.body.username).to.be.equal("Bear");
     });
   })
 });
 
 //Test verify
 describe("GET: /api/verify ", function () {
-  var options = {
+  let options = {
     url: "http://localhost:" + TEST_PORT + "/api/verify/U3KJ9duu4lpzO6XpkT7QZbotjMuNczuD",
     method: "GET"
   }
@@ -63,14 +62,14 @@ describe("GET: /api/verify ", function () {
 
 //Test stats
 describe("GET: /api/stats/Exhibat ", function () {
-  var options = {
+  let options = {
     url: "http://localhost:" + TEST_PORT + "/api/stats/Exhibat",
     method: "GET",
     headers: { Authorization: "JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImJlYXJ1a3VuQGdtYWlsLmNvbSIsImlhdCI6MTUyNTA3Njg1N30.duBYsnUBWK1slstqvzUc3szqzeHfiMx074Pcztz36L0" }
   }
   it("should get a success true when retriving stats for Exhibat", function () {
     request(options, function (error, res, body) {
-      var answer = JSON.parse(body)
+      let answer = JSON.parse(body)
       expect(answer.success).to.be.true;
     });
   })
@@ -78,14 +77,14 @@ describe("GET: /api/stats/Exhibat ", function () {
 
 //Test stats
 describe("GET: /api/stats/ ", function () {
-  var options = {
+  let options = {
     url: "http://localhost:" + TEST_PORT + "/api/stats/",
     method: "GET",
     headers: { Authorization: "JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImJlYXJ1a3VuQGdtYWlsLmNvbSIsImlhdCI6MTUyNTA3Njg1N30.duBYsnUBWK1slstqvzUc3szqzeHfiMx074Pcztz36L0" }
   }
   it("should get a success true when retriving all stats", function () {
     request(options, function (error, res, body) {
-      var answer = JSON.parse(body)
+      let answer = JSON.parse(body)
       expect(answer.success).to.be.true;
     });
   })
@@ -93,20 +92,20 @@ describe("GET: /api/stats/ ", function () {
 
 //Test get user
 describe("GET: /api/user/:username ", function () {
-  var options = {
+  let options = {
     url: "http://localhost:" + TEST_PORT + "/api/user/Bear",
     method: "GET",
     headers: { Authorization: "JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImJlYXJ1a3VuQGdtYWlsLmNvbSIsImlhdCI6MTUyNTA3Njg1N30.duBYsnUBWK1slstqvzUc3szqzeHfiMx074Pcztz36L0" }
   }
   it("should get a success true when retriving the specified user", function () {
     request(options, function (error, res, body) {
-      var answer = JSON.parse(body)
+      let answer = JSON.parse(body)
       expect(answer.success).to.be.true;
     });
   })
   it("username should be equal Bear", function () {
     request(options, function (error, res, body) {
-      var answer = JSON.parse(body)
+      let answer = JSON.parse(body)
       expect(answer.user.username).to.equal('Bear');
     });
   })
@@ -114,7 +113,7 @@ describe("GET: /api/user/:username ", function () {
 
 //Test get users
 describe("GET: /api/users ", function () {
-  var options = {
+  let options = {
     url: "http://localhost:" + TEST_PORT + "/api/users",
     method: "GET",
     headers: { Authorization: "JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImJlYXJ1a3VuQGdtYWlsLmNvbSIsImlhdCI6MTUyNTA3Njg1N30.duBYsnUBWK1slstqvzUc3szqzeHfiMx074Pcztz36L0" }
@@ -122,14 +121,14 @@ describe("GET: /api/users ", function () {
 
   it("should get a success true when retriving the users", function () {
     request(options, function (error, res, body) {
-      var answer = JSON.parse(body)
+      let answer = JSON.parse(body)
       expect(answer.success).to.be.true;
     });
   })
 
   it("the returned array should not be empty", function () {
     request(options, function (error, res, body) {
-      var answer = JSON.parse(body)
+      let answer = JSON.parse(body)
       expect(answer.users).not.to.be.empty;
     });
   })
