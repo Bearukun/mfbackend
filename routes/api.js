@@ -77,8 +77,9 @@ router.post('/signin', function (req, res) {
   User.findOne({
     'email.address': req.body.email
   }, function (err, user) {
-    if (err) throw err;
-
+    if (err){
+      return res.status(500).send({ success: false, msg: 'Something went wrong with the database - please contact support.' });
+    } 
     if (!user) {
       res.status(401).send({ success: false, msg: 'Authentication failed: Email not found.' });
     } else {
