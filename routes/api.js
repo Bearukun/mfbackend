@@ -26,7 +26,7 @@ router.post('/signup', function (req, res) {
       email: { address: req.body.email.address, verficationCode: genVerificationCode, newsLetter: req.body.email.newsletter },
       password: req.body.password,
       username: req.body.username,
-      info: { gender: req.body.info.gender, age: req.body.info.age,  nationality: req.body.info.nationality}
+      info: { gender: req.body.info.gender, age: req.body.info.age, nationality: req.body.info.nationality }
 
     });
     newUser.save(function (err) {
@@ -37,7 +37,7 @@ router.post('/signup', function (req, res) {
       }
       res.json({ success: true, msg: 'Successfully created new user' });
       try {
-        emailer.sendVerification(req.body.username, req.body.email, URL+'api/verify/' + genVerificationCode, false);
+        emailer.sendVerification(req.body.username, req.body.email, URL + 'api/verify/' + genVerificationCode, false);
       } catch (err) {
         res.json({ success: false, msg: 'Something went wrong, try again' });
       }
@@ -77,9 +77,9 @@ router.post('/signin', function (req, res) {
   User.findOne({
     'email.address': req.body.email
   }, function (err, user) {
-    if (err){
+    if (err) {
       return res.status(500).send({ success: false, msg: 'Something went wrong with the database - please contact support.' });
-    } 
+    }
     if (!user) {
       res.status(401).send({ success: false, msg: 'Authentication failed: Email not found.' });
     } else {
@@ -135,7 +135,7 @@ router.post('/forgot', function (req, res) {
       if (!user.email.isVerified) {
         //Send email
         try {
-          emailer.sendVerification(user.username, user.email.address, URL+'api/verify/' + user.email.verficationCode, true);
+          emailer.sendVerification(user.username, user.email.address, URL + 'api/verify/' + user.email.verficationCode, true);
         } catch (err) {
           res.json({ success: false, msg: 'Something went wrong when sending the email, try again' });
         }
@@ -154,7 +154,7 @@ router.post('/forgot', function (req, res) {
         });
         //Send email
         try {
-          emailer.sendReset(user.username, user.email.address, frontendURL+'/#/forgot/' + user.email.resetPasswordToken);
+          emailer.sendReset(user.username, user.email.address, frontendURL + '/#/forgot/' + user.email.resetPasswordToken);
         } catch (err) {
           res.json({ success: false, msg: 'Something went wrong when sending the email, try again' });
         }
@@ -343,8 +343,8 @@ router.get('/stats', passport.authenticate('jwt', { session: false }), function 
 //GET-method for pinging the server to check if it is online.
 router.get('/checkConnection', function (req, res) {
 
-    return res.send({ success: true, msg: 'Successfull connected to the server' });
-  }
+  return res.send({ success: true, msg: 'Successfull connected to the server' });
+}
 );
 
 //GET method to retriving stats for a specific game.
