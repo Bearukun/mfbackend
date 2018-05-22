@@ -40,7 +40,6 @@ var UserSchema = new Schema({
 UserSchema.pre('save', function (next) {
     var user = this;
     if (this.isModified('password') || this.isNew) {
-        //Salt factor 10
         bcrypt.genSalt(10, function (err, salt) {
             if (err) {
                 return next(err);
