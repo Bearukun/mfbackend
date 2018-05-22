@@ -1,6 +1,6 @@
 'use strict';
 const nodemailer = require('nodemailer');
-var ejs = require("ejs");
+let ejs = require("ejs");
 
 var transporter = nodemailer.createTransport({
     service: 'gmail',
