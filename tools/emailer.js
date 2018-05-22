@@ -53,7 +53,7 @@ function sendReset(username, email, resetLink) {
             throw err;
         } else {
             var mainOptions = {
-                from: '"OpenStats" <noreply@openstats.dk>', // sender address - adr. will revert to gmail
+                from: '"OpenStats" <noreply@openstats.dk>', 
                 to: email,
                 subject: 'Reset password',
                 text: 'Hi ' + username + '! To reset the password for your account, please click the link below: ' + resetLink, // plain text body
