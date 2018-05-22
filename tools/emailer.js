@@ -1,6 +1,5 @@
 'use strict';
 const nodemailer = require('nodemailer');
-var fs = require("fs");
 var ejs = require("ejs");
 
 var transporter = nodemailer.createTransport({
