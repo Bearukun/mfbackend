@@ -52,14 +52,13 @@ function sendReset(username, email, resetLink) {
         if (err) {
             throw err;
         } else {
-                var mainOptions = {
-                    from: '"OpenStats" <noreply@openstats.dk>', // sender address - adr. will revert to gmail
-                    to: email, // list of receivers
-                    subject: 'Reset password', // Subject line
-                    text: 'Hi ' + username + '! To reset the password for your account, please click the link below: ' + resetLink, // plain text body
-                    html: data
-                };
-            //console.log("html data ======================>", mainOptions.html);
+            var mainOptions = {
+                from: '"OpenStats" <noreply@openstats.dk>', // sender address - adr. will revert to gmail
+                to: email,
+                subject: 'Reset password',
+                text: 'Hi ' + username + '! To reset the password for your account, please click the link below: ' + resetLink, // plain text body
+                html: data
+            };
             transporter.sendMail(mainOptions, function (err, info) {
                 if (err) {
                     console.log(err);
@@ -77,13 +76,13 @@ function sendResetConfirm(username, email) {
         if (err) {
             throw err;
         } else {
-                var mainOptions = {
-                    from: '"OpenStats" <noreply@openstats.dk>', // sender address - adr. will revert to gmail
-                    to: email, // list of receivers
-                    subject: 'Password has been reset ', // Subject line
-                    text: 'Hi ' + username + '! Your password has been reset.', // plain text body
-                    html: data
-                };
+            var mainOptions = {
+                from: '"OpenStats" <noreply@openstats.dk>', // sender address - adr. will revert to gmail
+                to: email, // list of receivers
+                subject: 'Password has been reset ', // Subject line
+                text: 'Hi ' + username + '! Your password has been reset.', // plain text body
+                html: data
+            };
             //console.log("html data ======================>", mainOptions.html);
             transporter.sendMail(mainOptions, function (err, info) {
                 if (err) {
