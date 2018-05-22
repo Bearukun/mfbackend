@@ -56,7 +56,7 @@ function sendReset(username, email, resetLink) {
                 from: '"OpenStats" <noreply@openstats.dk>', 
                 to: email,
                 subject: 'Reset password',
-                text: 'Hi ' + username + '! To reset the password for your account, please click the link below: ' + resetLink, // plain text body
+                text: 'Hi ' + username + '! To reset the password for your account, please click the link below: ' + resetLink,
                 html: data
             };
             transporter.sendMail(mainOptions, function (err, info) {
