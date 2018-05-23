@@ -249,7 +249,6 @@ router.get('/user/:username', passport.authenticate('jwt', { session: false }), 
 
 //DELETE method for deleting a specific user from username.
 router.delete('/delete/:username', passport.authenticate('jwt', { session: false }), function (req, res) {
-  //We need the token for validation 
   var token = utils.getToken(req.headers);
   if (token) {
     User.findOne({
@@ -257,9 +256,7 @@ router.delete('/delete/:username', passport.authenticate('jwt', { session: false
     }, function (err, user) {
       if (err) throw err;
       else {
-
         if (user.roles.isAdmin) {
-
           User.findOneAndRemove({
             'username': req.params.username
           }, function (err, foundUser) {
@@ -268,7 +265,6 @@ router.delete('/delete/:username', passport.authenticate('jwt', { session: false
               return res.json({ success: true, msg: "Successfully removed user: " + req.params.username });
             }
           });
-
         } else {
           return res.status(403).send({ success: false, msg: 'Unauthorized.' });
         }
