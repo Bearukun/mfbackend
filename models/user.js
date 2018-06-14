@@ -30,7 +30,7 @@ var UserSchema = new Schema({
         rank: { type: String },
         gender: { type: String },
         age: { type: Number },
-        nationality: { nationality: String }
+        nationality: { type: String }
     },
     games: {
         type: []
